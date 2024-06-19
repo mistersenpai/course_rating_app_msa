@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("bc87f07a-266f-4b27-a5d1-fe46d0ebfbfe")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Course Rating Software")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25a64e0e7c56cee77b71c0c8b085878f4d82e52f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Course Rating Software")]
