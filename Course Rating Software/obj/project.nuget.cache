@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "SvC469h3H7c=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\John\\source\\repos\\Course Rating Software\\Course Rating Software\\Course Rating Software.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\John\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.20.1\\microsoft.visualstudio.azure.containers.tools.targets.1.20.1.nupkg.sha512"
+  ],
+  "logs": []
+}
