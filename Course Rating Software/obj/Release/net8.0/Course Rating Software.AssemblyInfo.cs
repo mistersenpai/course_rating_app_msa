@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Course Rating Software")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25a64e0e7c56cee77b71c0c8b085878f4d82e52f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+669a984baa13a30485fd103faf217461844d0f47")]
 [assembly: System.Reflection.AssemblyProductAttribute("Course Rating Software")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Course Rating Software")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
