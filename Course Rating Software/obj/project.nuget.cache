@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "CI+eB4xGu5o=",
+  "dgSpecHash": "r45u7oDiP9g=",
   "success": true,
-  "projectFilePath": "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\Course Rating Software.csproj",
+  "projectFilePath": "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\Course Rating Software.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\John\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.20.1\\microsoft.visualstudio.azure.containers.tools.targets.1.20.1.nupkg.sha512"
+    "C:\\Users\\John\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\John\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\John\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\John\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\John\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\John\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
   ],
   "logs": []
 }

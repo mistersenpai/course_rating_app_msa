@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\Course Rating Software.csproj": {}
+    "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\Course Rating Software.csproj": {}
   },
   "projects": {
-    "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\Course Rating Software.csproj": {
+    "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\Course Rating Software.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\Course Rating Software.csproj",
+        "projectUniqueName": "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\Course Rating Software.csproj",
         "projectName": "Course Rating Software",
-        "projectPath": "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\Course Rating Software.csproj",
+        "projectPath": "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\Course Rating Software.csproj",
         "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\John\\source\\repos\\MSA\\Course Rating Software\\obj\\",
+        "outputPath": "C:\\Users\\John\\source\\repos\\Course Rating Software\\course_rating_app_msa\\Course Rating Software\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,9 +46,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[1.20.1, )"
+              "version": "[6.4.0, )"
             }
           },
           "imports": [
