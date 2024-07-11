@@ -1,0 +1,107 @@
+[
+    {
+        "Id": 0,
+        "Name": "Principles of Programming",
+        "CourseId": "COMPSCI 101",
+        "Body": "A practical introduction to computers and computer programming in a high-level language.",
+        "Rating": 4.5
+    },
+    {
+        "Id": 1,
+        "Name": "Introduction to Computer Systems",
+        "CourseId": "COMPSCI 110",
+        "Body": "An introduction to the various layers that make up a modern computer system.",
+        "Rating": 4.3
+    },
+    {
+        "Id": 2,
+        "Name": "Mathematics for Computer Science",
+        "CourseId": "COMPSCI 120",
+        "Body": "Basic mathematical tools and methods needed for computer science.",
+        "Rating": 4.1
+    },
+    {
+        "Id": 3,
+        "Name": "Introduction to Software Fundamentals",
+        "CourseId": "COMPSCI 130",
+        "Body": "Fundamental programming techniques and processes.",
+        "Rating": 4.0
+    },
+    {
+        "Id": 4,
+        "Name": "Computer Organisation",
+        "CourseId": "COMPSCI 210",
+        "Body": "The low level representation of data and algorithms in the computer.",
+        "Rating": 3.9
+    },
+    {
+        "Id": 5,
+        "Name": "Data Communications and Security",
+        "CourseId": "COMPSCI 215",
+        "Body": "An introduction to data communications and secure communication systems.",
+        "Rating": 4.2
+    },
+    {
+        "Id": 6,
+        "Name": "Algorithms and Data Structures",
+        "CourseId": "COMPSCI 220",
+        "Body": "An introduction to the analysis of algorithms and data structures.",
+        "Rating": 4.6
+    },
+    {
+        "Id": 7,
+        "Name": "Discrete Structures in Mathematics and Computer Science",
+        "CourseId": "COMPSCI 225",
+        "Body": "Foundations of computer science, mathematics and logic.",
+        "Rating": 3.8
+    },
+    {
+        "Id": 8,
+        "Name": "Object Oriented Software Development",
+        "CourseId": "COMPSCI 230",
+        "Body": "Design and implementation of object-oriented programs.",
+        "Rating": 4.4
+    },
+    {
+        "Id": 9,
+        "Name": "Software Development Methodologies",
+        "CourseId": "COMPSCI 235",
+        "Body": "Introduction to software development processes and best practices.",
+        "Rating": 4.5
+    },
+    {
+        "Id": 10,
+        "Name": "Computer Architecture",
+        "CourseId": "COMPSCI 313",
+        "Body": "Modern processor architectures and principles of modern processor design.",
+        "Rating": 4.0
+    },
+    {
+        "Id": 11,
+        "Name": "Data Communications Technologies",
+        "CourseId": "COMPSCI 315",
+        "Body": "Structure of data communications and networks.",
+        "Rating": 4.1
+    },
+    {
+        "Id": 12,
+        "Name": "Cyber Security",
+        "CourseId": "COMPSCI 316",
+        "Body": "Concepts related to software, system and network security.",
+        "Rating": 4.3
+    },
+    {
+        "Id": 13,
+        "Name": "Applied Algorithmics",
+        "CourseId": "COMPSCI 320",
+        "Body": "Design techniques for efficient algorithmic problem-solving.",
+        "Rating": 4.2
+    },
+    {
+        "Id": 14,
+        "Name": "Large-Scale Software Development",
+        "CourseId": "COMPSCI 331",
+        "Body": "Development of large-scale software systems.",
+        "Rating": 4.1
+    }
+]

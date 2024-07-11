@@ -1,42 +1,40 @@
 using Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
-namespace Services;
+namespace Services
+{
+    public class CourseService
+    {
+        static int availableId = 3;
+        // dummy database
+        static List<Course> CourseDB;
 
-public class CourseService {
-    
-    //each and every course added will be given available id
-    static int availableId = 3;
+        static CourseService()
+        {
+            // Reads data from the JSON file
+            var jsonData = File.ReadAllText("services/course_dummy_data.json");
+            CourseDB = JsonSerializer.Deserialize<List<Course>>(jsonData);
+        }
+        //gets all courses
+        public static List<Course> GetAll() => CourseDB;
 
-    //temporary database -- cache
-    static List<Course> CourseDB;
+        //gets single course by Id
+        public static Course? Get(int id) => CourseDB
+        .FirstOrDefault(course => course.Id == id);
 
-    //this class must not be instiated anymore --- "singleton"
-    static CourseService(){
-        //populate datavase
-        CourseDB = new List<Course>(){
-            new Course{
-                Id = 0, 
-                Name = "Introduction to Programming", 
-                CourseId = "CS101",
-                Body = "BLANK", 
-                Rating = 4.5},
+        //update existing course
+        public static void Update(Course course){
+            //get index of course that matches givn c.id
+            var index = CourseDB.FindIndex(c => c.Id == course.Id);
 
-            new Course{
-                Id = 1, 
-                Name = "Math for Computer Science", 
-                CourseId = "CS120",
-                Body = "BLANK", 
-                Rating = 4.3},
+            // not found
+            if(index == -1) return;
 
-            new Course{
-                Id = 2, 
-                Name = "Advanced Programming Principals", 
-                CourseId = "CS130",
-                Body = "BLANK", 
-                Rating = 3.9},
-        };
+            //update by index
+            CourseDB[index] = course;
+        }
+
     }
-
-    //gets all courses
-    public static List<Course> GetAll() => CourseDB;
 }
