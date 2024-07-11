@@ -22,7 +22,7 @@ public class CourseController : ControllerBase{
 
         return course;
     }
-
+    //HTTP action to update course
     [HttpPut("{id}")]
     public IActionResult Update(int id, Course course) {
         // check if id matches the new course
@@ -30,12 +30,31 @@ public class CourseController : ControllerBase{
 
         //check if exists
         var existingCourse = CourseService.Get(id);
-
         if(existingCourse is null) return NotFound();
 
         CourseService.Update(course);
 
         return NoContent();
 
+    }
+
+    //HTTP action to create new course
+    [HttpPost]
+    public IActionResult Create(Course course){
+        CourseService.Add(course);
+        
+        return CreatedAtAction(nameof(Get), new {Id = course.Id}, course);
+    }
+
+    //HTTP action to delete existing course
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id) {
+        // check if course exists
+        var course = CourseService.Get(id);
+        if(course is null) return NotFound();
+
+        CourseService.Delete(id);
+
+        return NoContent();
     }
 };

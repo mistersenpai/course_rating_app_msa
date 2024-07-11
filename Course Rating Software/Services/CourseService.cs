@@ -7,7 +7,7 @@ namespace Services
 {
     public class CourseService
     {
-        static int availableId = 3;
+        static int availableId = 15;
         // dummy database
         static List<Course> CourseDB;
 
@@ -34,6 +34,22 @@ namespace Services
 
             //update by index
             CourseDB[index] = course;
+        }
+
+        //add a new course
+        public static void Add(Course course){
+            course.Id = availableId++;
+            CourseDB.Add(course);
+        }
+
+        //delete course by id
+        public static void Delete(int id){
+            var course = Get(id);
+            
+            //check if exists
+            if(course is null) return;
+
+            CourseDB.Remove(course);
         }
 
     }
