@@ -6,55 +6,65 @@ namespace Controllers;
 
 [ApiController]
 [Route("[controller]")]
+public class CourseController : ControllerBase
+{
+    private readonly CourseService _courseService;
 
-public class CourseController : ControllerBase{
+    public CourseController(CourseService courseService)
+    {
+        _courseService = courseService;
+    }
 
-    //HTTP action to get all courses from service
+    // HTTP action to get all courses from service
     [HttpGet]
-    public ActionResult<List<Course>> Get() => CourseService.GetAll();
+    public ActionResult<List<Course>> Get() => _courseService.GetAll();
 
-    //HTTP action to get unique course
+    // HTTP action to get unique course
     [HttpGet("{id}")]
-    public ActionResult<Course> Get(int id){
-        var course = CourseService.Get(id);
+    public ActionResult<Course> Get(int id)
+    {
+        var course = _courseService.Get(id);
 
-        if(course is null) return NotFound();
+        if (course is null) return NotFound();
 
         return course;
     }
-    //HTTP action to update course
+
+    // HTTP action to update course
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Course course) {
+    public IActionResult Update(int id, Course course)
+    {
         // check if id matches the new course
         if (id != course.Id) return BadRequest();
 
-        //check if exists
-        var existingCourse = CourseService.Get(id);
-        if(existingCourse is null) return NotFound();
+        // check if exists
+        var existingCourse = _courseService.Get(id);
+        if (existingCourse is null) return NotFound();
 
-        CourseService.Update(course);
+        _courseService.Update(course);
 
         return NoContent();
-
     }
 
-    //HTTP action to create new course
+    // HTTP action to create new course
     [HttpPost]
-    public IActionResult Create(Course course){
-        CourseService.Add(course);
-        
-        return CreatedAtAction(nameof(Get), new {Id = course.Id}, course);
+    public IActionResult Create(Course course)
+    {
+        _courseService.Add(course);
+
+        return CreatedAtAction(nameof(Get), new { Id = course.Id }, course);
     }
 
-    //HTTP action to delete existing course
+    // HTTP action to delete existing course
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id) {
+    public IActionResult Delete(int id)
+    {
         // check if course exists
-        var course = CourseService.Get(id);
-        if(course is null) return NotFound();
+        var course = _courseService.Get(id);
+        if (course is null) return NotFound();
 
-        CourseService.Delete(id);
+        _courseService.Delete(id);
 
         return NoContent();
     }
-};
+}

@@ -1,6 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Models;
+using Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<CourseContext>(options =>
+    options.UseInMemoryDatabase("CourseList"));
+
+builder.Services.AddScoped<CourseService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

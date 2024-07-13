@@ -32,3 +32,7 @@ C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course R
 C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\obj\Debug\net8.0\Course Rating Software.genruntimeconfig.cache
 C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\obj\Debug\net8.0\ref\Course Rating Software.dll
 C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\bin\Debug\net8.0\Services\course_dummy_data.json
+C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\bin\Debug\net8.0\Services\department_dummy_data.json
+C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\John\source\repos\Course Rating Software\course_rating_app_msa\Course Rating Software\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
