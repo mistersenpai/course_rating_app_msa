@@ -9,5 +9,6 @@ namespace Models
         }
 
         public DbSet<Course> Courses { get; set; } = null!;
+        public DbSet<Department> Departments { get; set; } = null!;
     }
 }

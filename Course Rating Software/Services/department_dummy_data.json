@@ -1,9 +1,27 @@
 [
     {
-        "Id": 0,
-        "Name": "Computer Science",
+        "Id": 1,
         "University": "University of Auckland",
-        "Body": "A practical introduction to computers and computer programming in a high-level language.",
-        "Rating": 4.5
+        "Name": "Computer Science"
+    },
+    {
+        "Id": 2,
+        "University": "University of Auckland",
+        "Name": "Information Systems"
+    },
+    {
+        "Id": 3,
+        "University": "University of Auckland",
+        "Name": "Software Engineering"
+    },
+    {
+        "Id": 4,
+        "University": "University of Auckland",
+        "Name": "Data Science"
+    },
+    {
+        "Id": 5,
+        "University": "University of Auckland",
+        "Name": "Cyber Security"
     }
 ]

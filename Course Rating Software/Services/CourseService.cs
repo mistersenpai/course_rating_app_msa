@@ -18,12 +18,36 @@ namespace Services
             // Populate database with JSON data if empty
             if (!_context.Courses.Any())
             {
-                var jsonData = File.ReadAllText("services/course_dummy_data.json");
-                var courses = JsonSerializer.Deserialize<List<Course>>(jsonData);
+                // Load Departments
+                var departmentData = File.ReadAllText("services/department_dummy_data.json");
+                var departments = JsonSerializer.Deserialize<List<Department>>(departmentData);
+                if (departments != null)
+                {
+                    foreach (var department in departments)
+                    {
+                        if (!_context.Departments.Any(d => d.Id == department.Id))
+                        {
+                            _context.Departments.Add(department);
+                        }
+                    }
+                    _context.SaveChanges();
+                }
+
+                // Load Courses
+                var courseData = File.ReadAllText("services/course_dummy_data.json");
+                var courses = JsonSerializer.Deserialize<List<Course>>(courseData);
                 if (courses != null)
                 {
                     foreach (var course in courses)
                     {
+                        // Assign random department to each course
+                        var department = _context.Departments.OrderBy(d => EF.Functions.Random()).FirstOrDefault();
+                        if (department != null)
+                        {
+                            course.DepartmentId = department.Id;
+                            course.Department = department;
+                        }
+
                         // Detach any existing tracked entity with the same key
                         var trackedEntity = _context.Courses.Local.FirstOrDefault(c => c.Id == course.Id);
                         if (trackedEntity != null)
@@ -38,10 +62,10 @@ namespace Services
         }
 
         // gets all courses
-        public List<Course> GetAll() => _context.Courses.ToList();
+        public List<Course> GetAll() => _context.Courses.Include(c => c.Department).ToList();
 
         // gets single course by Id
-        public Course? Get(int id) => _context.Courses.Find(id);
+        public Course? Get(int id) => _context.Courses.Include(c => c.Department).FirstOrDefault(c => c.Id == id);
 
         // update existing course
         public void Update(Course course)
