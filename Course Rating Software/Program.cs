@@ -9,6 +9,7 @@ builder.Services.AddDbContext<CourseContext>(options =>
     options.UseInMemoryDatabase("CourseList"));
 
 builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<DepartmentService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
