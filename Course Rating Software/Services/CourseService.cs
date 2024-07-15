@@ -4,70 +4,57 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Services
 {
     public class CourseService
     {
         private readonly CourseContext _context;
+        private readonly ILogger<CourseService> _logger;
 
-        public CourseService(CourseContext context)
+        public CourseService(CourseContext context, ILogger<CourseService> logger)
         {
             _context = context;
+            _logger = logger;
 
-            // Populate database with JSON data if empty
+            InitializeCourses();
+        }
+
+        private void InitializeCourses()
+        {
             if (!_context.Courses.Any())
             {
-                // Load Departments
-                var departmentData = File.ReadAllText("services/department_dummy_data.json");
-                var departments = JsonSerializer.Deserialize<List<Department>>(departmentData);
-                if (departments != null)
-                {
-                    foreach (var department in departments)
-                    {
-                        if (!_context.Departments.Any(d => d.Id == department.Id))
-                        {
-                            _context.Departments.Add(department);
-                        }
-                    }
-                    _context.SaveChanges();
-                }
-
-                // Load Courses
-                var courseData = File.ReadAllText("services/course_dummy_data.json");
-                var courses = JsonSerializer.Deserialize<List<Course>>(courseData);
+                _logger.LogInformation("Initializing courses from JSON file.");
+                var jsonData = File.ReadAllText("services/course_dummy_data.json");
+                var courses = JsonSerializer.Deserialize<List<Course>>(jsonData);
                 if (courses != null)
                 {
+                    _logger.LogInformation($"Read JSON data: {jsonData}");
                     foreach (var course in courses)
                     {
-                        // Assign random department to each course
-                        var department = _context.Departments.OrderBy(d => EF.Functions.Random()).FirstOrDefault();
+                        var department = _context.Departments.Find(course.DepartmentId);
                         if (department != null)
                         {
-                            course.DepartmentId = department.Id;
-                            course.Department = department;
+                            var existingCourse = _context.Courses.Local.FirstOrDefault(c => c.Id == course.Id);
+                            if (existingCourse == null)
+                            {
+                                _context.Courses.Add(course);
+                            }
                         }
-
-                        // Detach any existing tracked entity with the same key
-                        var trackedEntity = _context.Courses.Local.FirstOrDefault(c => c.Id == course.Id);
-                        if (trackedEntity != null)
+                        else
                         {
-                            _context.Entry(trackedEntity).State = EntityState.Detached;
+                            _logger.LogWarning($"Department with ID {course.DepartmentId} not found for course: {course.Name}");
                         }
-                        _context.Courses.Add(course);
                     }
                     _context.SaveChanges();
                 }
             }
         }
 
-        // gets all courses
         public List<Course> GetAll() => _context.Courses.Include(c => c.Department).ToList();
-
-        // gets single course by Id
         public Course? Get(int id) => _context.Courses.Include(c => c.Department).FirstOrDefault(c => c.Id == id);
 
-        // update existing course
         public void Update(Course course)
         {
             var existingCourse = _context.Courses.Find(course.Id);
@@ -78,7 +65,6 @@ namespace Services
             }
         }
 
-        // add a new course
         public void Add(Course course)
         {
             course.Id = _context.Courses.Any() ? _context.Courses.Max(c => c.Id) + 1 : 1;
@@ -86,7 +72,6 @@ namespace Services
             _context.SaveChanges();
         }
 
-        // delete course by id
         public void Delete(int id)
         {
             var course = _context.Courses.Find(id);

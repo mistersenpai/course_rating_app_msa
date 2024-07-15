@@ -4,46 +4,42 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Services
 {
     public class DepartmentService
     {
         private readonly CourseContext _context;
+        private readonly ILogger<DepartmentService> _logger;
 
-        public DepartmentService(CourseContext context)
+        public DepartmentService(CourseContext context, ILogger<DepartmentService> logger)
         {
             _context = context;
+            _logger = logger;
 
-            // Populate database with JSON data if empty
+            InitializeDepartments();
+        }
+
+        private void InitializeDepartments()
+        {
             if (!_context.Departments.Any())
             {
+                _logger.LogInformation("Initializing departments from JSON file.");
                 var jsonData = File.ReadAllText("services/department_dummy_data.json");
                 var departments = JsonSerializer.Deserialize<List<Department>>(jsonData);
                 if (departments != null)
                 {
-                    foreach (var department in departments)
-                    {
-                        // Detach any existing tracked entity with the same key
-                        var trackedEntity = _context.Departments.Local.FirstOrDefault(d => d.Id == department.Id);
-                        if (trackedEntity != null)
-                        {
-                            _context.Entry(trackedEntity).State = EntityState.Detached;
-                        }
-                        _context.Departments.Add(department);
-                    }
+                    _logger.LogInformation($"Read JSON data: {jsonData}");
+                    _context.Departments.AddRange(departments);
                     _context.SaveChanges();
                 }
             }
         }
 
-        // gets all departments
-        public List<Department> GetAll() => _context.Departments.ToList();
+        public List<Department> GetAll() => _context.Departments.Include(d => d.Courses).ToList();
+        public Department? Get(int id) => _context.Departments.Include(d => d.Courses).FirstOrDefault(d => d.Id == id);
 
-        // gets single department by Id
-        public Department? Get(int id) => _context.Departments.Find(id);
-
-        // update existing department
         public void Update(Department department)
         {
             var existingDepartment = _context.Departments.Find(department.Id);
@@ -54,7 +50,6 @@ namespace Services
             }
         }
 
-        // add a new department
         public void Add(Department department)
         {
             department.Id = _context.Departments.Any() ? _context.Departments.Max(d => d.Id) + 1 : 1;
@@ -62,7 +57,6 @@ namespace Services
             _context.SaveChanges();
         }
 
-        // delete department by id
         public void Delete(int id)
         {
             var department = _context.Departments.Find(id);
