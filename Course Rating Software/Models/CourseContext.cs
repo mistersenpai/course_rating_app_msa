@@ -8,8 +8,8 @@ namespace Models
         {
         }
 
-        public DbSet<Course> Courses { get; set; } = null!;
-        public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

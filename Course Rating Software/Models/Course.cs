@@ -8,6 +8,6 @@ namespace Models
         public string Body { get; set; }
         public double Rating { get; set; }
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }  // Add this line
+        public Department Department { get; set; }
     }
 }

@@ -31,16 +31,14 @@ namespace Services
                 if (courses != null)
                 {
                     _logger.LogInformation($"Read JSON data: {jsonData}");
+
                     foreach (var course in courses)
                     {
                         var department = _context.Departments.Find(course.DepartmentId);
                         if (department != null)
                         {
-                            var existingCourse = _context.Courses.Local.FirstOrDefault(c => c.Id == course.Id);
-                            if (existingCourse == null)
-                            {
-                                _context.Courses.Add(course);
-                            }
+                            course.Id = 0;  // Ensure unique Ids
+                            _context.Courses.Add(course);
                         }
                         else
                         {
