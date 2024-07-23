@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Course_Rating_Software.Migrations
 {
     [DbContext(typeof(CourseContext))]
-    [Migration("20240719161311_InitialCreate")]
+    [Migration("20240723133805_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -69,13 +69,31 @@ namespace Course_Rating_Software.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("University")
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UniversityId");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("Models.University", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Universities");
                 });
 
             modelBuilder.Entity("Models.Course", b =>
@@ -91,7 +109,23 @@ namespace Course_Rating_Software.Migrations
 
             modelBuilder.Entity("Models.Department", b =>
                 {
+                    b.HasOne("Models.University", "University")
+                        .WithMany("Departments")
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("Models.Department", b =>
+                {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("Models.University", b =>
+                {
+                    b.Navigation("Departments");
                 });
 #pragma warning restore 612, 618
         }

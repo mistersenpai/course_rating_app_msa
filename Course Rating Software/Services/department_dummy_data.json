@@ -1,27 +1,27 @@
 [
     {
         "Id": 1,
-        "University": "University of Auckland",
+        "UniversityId": 1,
         "Name": "Computer Science"
     },
     {
         "Id": 2,
-        "University": "University of Auckland",
+        "UniversityId": 1,
         "Name": "Information Systems"
     },
     {
         "Id": 3,
-        "University": "University of Auckland",
+        "UniversityId": 1,
         "Name": "Software Engineering"
     },
     {
         "Id": 4,
-        "University": "University of Auckland",
+        "UniversityId": 1,
         "Name": "Data Science"
     },
     {
         "Id": 5,
-        "University": "University of Auckland",
+        "UniversityId": 2,
         "Name": "Cyber Security"
     }
 ]

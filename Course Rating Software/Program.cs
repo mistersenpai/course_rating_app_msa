@@ -8,13 +8,12 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<CourseContext>(options =>
-    options.UseNpgsql(connectionString));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<DepartmentService>();
 builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<UniversityService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -43,6 +42,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var universityService = services.GetRequiredService<UniversityService>();
     var departmentService = services.GetRequiredService<DepartmentService>();
     var courseService = services.GetRequiredService<CourseService>();
 }

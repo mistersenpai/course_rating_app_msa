@@ -1,10 +1,6 @@
-using Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Models;
+using System.Text.Json;
 
 namespace Services
 {
@@ -40,6 +36,13 @@ namespace Services
         public List<Department> GetAll() => _context.Departments.Include(d => d.Courses).ToList();
         public Department? Get(int id) => _context.Departments.Include(d => d.Courses).FirstOrDefault(d => d.Id == id);
 
+        public void Add(Department department)
+        {
+            department.Id = _context.Departments.Any() ? _context.Departments.Max(d => d.Id) + 1 : 1;
+            _context.Departments.Add(department);
+            _context.SaveChanges();
+        }
+
         public void Update(Department department)
         {
             var existingDepartment = _context.Departments.Find(department.Id);
@@ -48,13 +51,6 @@ namespace Services
                 _context.Entry(existingDepartment).CurrentValues.SetValues(department);
                 _context.SaveChanges();
             }
-        }
-
-        public void Add(Department department)
-        {
-            department.Id = _context.Departments.Any() ? _context.Departments.Max(d => d.Id) + 1 : 1;
-            _context.Departments.Add(department);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
