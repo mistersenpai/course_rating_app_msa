@@ -1,51 +1,36 @@
 import * as React from 'react';
-import { Grid, Box, Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import DisplayCard from './DisplayCard';
-import { useEffect, useState } from 'react';
 
-interface University {
-  id: number;
-  name: string;
+interface ContainerProps {
+  items: { id: number; name: string }[];
+  learnMoreLink: (id: number) => string;
 }
 
-const Container: React.FC = () => {
-  const [universities, setUniversities] = useState<University[]>([]);
-
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5151/university');
-        const data = await response.json();
-        setUniversities(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+const Container: React.FC<ContainerProps> = ({ items, learnMoreLink }) => {
   return (
     <Box
       sx={{
         padding: '2%',
         backgroundColor: 'white',
         width: '100%',
-        maxWidth: '1200px', // Ensure maxWidth is reasonable
+        maxWidth: '1200px',
         margin: 'auto',
       }}
     >
       <Paper elevation={3} sx={{ padding: '2%' }}>
-        <Grid container spacing={2} justifyContent="flex-start">
-          
-          {universities.map((university) => (
-            <Grid item xs={12} sm={6} md={4} lg={-1} key={university.id}>
-              <DisplayCard name={university.name} />
-            </Grid>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: 2,
+          }}
+        >
+          {items.map((item) => (
+            <DisplayCard key={item.id} id={item.id} name={item.name} learnMoreLink={learnMoreLink(item.id)} />
           ))}
-        </Grid>
+        </Box>
       </Paper>
     </Box>
   );
