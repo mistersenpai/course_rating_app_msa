@@ -7,6 +7,7 @@ import PrimarySearchAppBar from '../components/NavBar';
 import UniversityData from '../utils/UniversityData';
 import DepartmentPage from '../pages/DepartmentPage';
 import DepartmentDetails from '../pages/DepartmentDetails';
+import CourseData from '../utils/CourseData';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,15 +15,7 @@ function App() {
   return (
     <Router>
       <PrimarySearchAppBar />
-      <div style={{ paddingTop: '64px' }}> {/* Ensure content is not hidden behind the fixed AppBar */}
-        <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
+      <div style={{ paddingTop: '20px' }}> {/* Ensure content is not hidden behind the fixed AppBar */}
         <h1>Vite + React</h1>
 
         <Routes>
@@ -44,6 +37,7 @@ function App() {
           } />
           <Route path="/departments/:universityId" element={<DepartmentPage />} />
           <Route path="/department/:id" element={<DepartmentDetails />} />
+          <Route path="/course/:id" element={<CourseData />} />
         </Routes>
       </div>
     </Router>

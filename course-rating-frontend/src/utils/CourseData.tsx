@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Paper, Typography } from '@mui/material';
-import CourseList from '../components/CourseList';
 
 interface Course {
   id: number;
@@ -12,32 +11,25 @@ interface Course {
   departmentId: number;
 }
 
-interface Department {
-  id: number;
-  name: string;
-  universityId: number;
-  courses: Course[];
-}
-
-const DepartmentDetails: React.FC = () => {
+const CourseData: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [department, setDepartment] = useState<Department | null>(null);
+  const [course, setCourse] = useState<Course | null>(null);
 
   useEffect(() => {
-    const fetchDepartmentDetails = async () => {
+    const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5151/Department/${id}`);
+        const response = await fetch(`http://localhost:5151/Course/${id}`);
         const data = await response.json();
-        setDepartment(data);
+        setCourse(data);
       } catch (error) {
-        console.error('Error fetching department details:', error);
+        console.error('Error fetching course details:', error);
       }
     };
 
-    fetchDepartmentDetails();
+    fetchCourseDetails();
   }, [id]);
 
-  if (!department) {
+  if (!course) {
     return <p>Loading...</p>;
   }
 
@@ -46,22 +38,23 @@ const DepartmentDetails: React.FC = () => {
       sx={{
         padding: '2%',
         backgroundColor: 'white',
-        width: '88%',
-        maxWidth: '1200px',
+        width: '80%',
         margin: 'auto',
       }}
     >
       <Paper elevation={3} sx={{ padding: '2%' }}>
         <Typography variant="h4" component="div" gutterBottom>
-          {department.name}
+          {course.courseId}: {course.name}
         </Typography>
-        <Typography variant="h6" component="div" gutterBottom>
-          Courses
+        <Typography variant="body1" component="div" gutterBottom>
+          {course.body}
         </Typography>
-        <CourseList courses={department.courses} />
+        <Typography variant="body2" color="text.secondary" component="div" gutterBottom>
+          Rating: {course.rating}
+        </Typography>
       </Paper>
     </Box>
   );
 };
 
-export default DepartmentDetails;
+export default CourseData;
