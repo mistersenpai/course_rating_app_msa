@@ -38,7 +38,7 @@ const DepartmentPage: React.FC = () => {
       }}
     >
       <Paper elevation={3} sx={{ padding: '2%' }}>
-        <h2>Department Page</h2>
+        <h2>Browse Departments:</h2>
         <Box
           sx={{
             display: 'flex',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Box, Paper } from '@mui/material';
-import DisplayCard from '../components/DisplayCard';
+import { Box, Typography, Grid, TextField } from '@mui/material';
+import UniDisplayCard from '../components/UniDisplayCard';
 
 interface University {
   id: number;
@@ -10,6 +10,7 @@ interface University {
 
 const UniversityData: React.FC = () => {
   const [universities, setUniversities] = useState<University[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,31 +26,38 @@ const UniversityData: React.FC = () => {
     fetchData();
   }, []);
 
+  const filteredUniversities = universities.filter((university) =>
+    university.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <Box
-      sx={{
-        padding: '2%',
-        backgroundColor: 'white',
-        width: '88%',
-        maxWidth: '1200px',
-        margin: 'auto',
-      }}
-    >
-      <Paper elevation={3} sx={{ padding: '2%' }}>
-        <h2>University Page</h2>
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: 2,
-          }}
-        >
-          {universities.map((university) => (
-            <DisplayCard key={university.id} id={university.id} name={university.name} learnMoreLink={`/departments`} />
-          ))}
-        </Box>
-      </Paper>
+    <Box sx={{ padding: '2%', margin: 'auto', marginTop: 8 }}>
+      <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
+        <Typography variant="h4" component="div" gutterBottom>
+          Search Classes
+        </Typography>
+      </Box>
+
+      <TextField
+        label="Search"
+        variant="outlined"
+        fullWidth
+        sx={{ marginBottom: 4, backgroundColor: 'white' }}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+        <Typography variant="h4" component="div" gutterBottom>
+          Search Universities
+        </Typography>
+
+      <Grid container spacing={4} justifyContent="center">
+        {filteredUniversities.map((university) => (
+          <Grid item key={university.id}>
+            <UniDisplayCard id={university.id} name={university.name} />
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };

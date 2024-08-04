@@ -8,6 +8,7 @@ import UniversityData from '../utils/UniversityData';
 import DepartmentPage from '../pages/DepartmentPage';
 import DepartmentDetails from '../pages/DepartmentDetails';
 import CourseData from '../utils/CourseData';
+import { Divider, Typography, Box } from '@mui/material';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,31 +16,24 @@ function App() {
   return (
     <Router>
       <PrimarySearchAppBar />
-      <div style={{ paddingTop: '20px' }}> {/* Ensure content is not hidden behind the fixed AppBar */}
-        <h1>Vite + React</h1>
 
+      <Box sx={{ paddingTop: '64px', textAlign: 'center', color: 'white' }}> {/* Ensure content is not hidden behind the fixed AppBar */}
+        <img src={viteLogo} className="logo" alt="Vite logo" />
+        <Typography variant='h2' sx={{ color: 'white' }}>Course Rater</Typography>
+
+        <Divider sx={{ marginY: 2, borderColor: 'white' }} />
+        
         <Routes>
           <Route path="/" element={
             <>
-              <UniversityData />
-              <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                  count is {count}
-                </button>
-                <p>
-                  Edit <code>pages/App.tsx</code> and save to test HMR
-                </p>
-              </div>
-              <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-              </p>
+              <UniversityData />            
             </>
           } />
           <Route path="/departments/:universityId" element={<DepartmentPage />} />
           <Route path="/department/:id" element={<DepartmentDetails />} />
           <Route path="/course/:id" element={<CourseData />} />
         </Routes>
-      </div>
+      </Box>
     </Router>
   );
 }
