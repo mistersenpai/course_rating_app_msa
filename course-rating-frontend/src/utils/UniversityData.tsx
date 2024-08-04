@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Box, Typography, Grid, TextField } from '@mui/material';
+import { Box, Typography, Grid, TextField, useMediaQuery, ThemeProvider, createTheme } from '@mui/material';
 import UniDisplayCard from '../components/UniDisplayCard';
 
 interface University {
@@ -11,6 +11,17 @@ interface University {
 const UniversityData: React.FC = () => {
   const [universities, setUniversities] = useState<University[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,34 +42,38 @@ const UniversityData: React.FC = () => {
   );
 
   return (
-    <Box sx={{ padding: '2%', margin: 'auto', marginTop: 8 }}>
-      <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
-        <Typography variant="h4" component="div" gutterBottom>
-          Search Classes
-        </Typography>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          padding: '2%',
+          margin: 'auto',
+          color: 'text.primary',
+        }}
+      >
+        <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
+          <Typography variant="h4" component="div" gutterBottom>
+            University Page
+          </Typography>
+        </Box>
+
+        <TextField
+          label="Search"
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 4, backgroundColor: 'background.paper' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        <Grid container spacing={4} justifyContent="center">
+          {filteredUniversities.map((university) => (
+            <Grid item key={university.id}>
+              <UniDisplayCard id={university.id} name={university.name} />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
-
-      <TextField
-        label="Search"
-        variant="outlined"
-        fullWidth
-        sx={{ marginBottom: 4, backgroundColor: 'white' }}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-
-        <Typography variant="h4" component="div" gutterBottom>
-          Search Universities
-        </Typography>
-
-      <Grid container spacing={4} justifyContent="center">
-        {filteredUniversities.map((university) => (
-          <Grid item key={university.id}>
-            <UniDisplayCard id={university.id} name={university.name} />
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+    </ThemeProvider>
   );
 };
 

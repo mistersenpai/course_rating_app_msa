@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, CardContent, CardActions, Typography, Button } from '@mui/material';
+import { Card, CardContent, CardActions, Typography, Button, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 interface UniDisplayCardProps {
@@ -8,8 +8,17 @@ interface UniDisplayCardProps {
 }
 
 const UniDisplayCard: React.FC<UniDisplayCardProps> = ({ id, name }) => {
+  const theme = useTheme();
+  
   return (
-    <Card sx={{ minWidth: 275, margin: 'auto', backgroundColor: 'white' }}>
+    <Card
+      sx={{
+        minWidth: 275,
+        margin: 'auto',
+        backgroundColor: theme.palette.background.paper,
+        color: theme.palette.text.primary,
+      }}
+    >
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Name
